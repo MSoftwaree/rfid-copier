@@ -18,7 +18,8 @@ class IO:
 	def double_beep(self):
 		for loop in range(2):
 			self.beep()
+			time.sleep(0.1)
 
 
 io = IO()
-io.beep()
+io.double_beep()

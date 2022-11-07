@@ -23,7 +23,8 @@ class RFID:
 	def write_card(self):
 		try:
 			text = input("New data: ")
-			self.lcd.text("Writing...", 1)
+			self.lcd.text("Please hold the card", 1)
+			self.lcd.text("Writing...", 2)
 			self.reader.write(text)
 			self.lcd.text("Written", 2)
 		finally:
@@ -34,7 +35,7 @@ class RFID:
 
 rfid = RFID()
 
-rfid.write_card()
-#rfid.read_card()
+#rfid.write_card()
+rfid.read_card()
 
 print("Done")
