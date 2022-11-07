@@ -1,24 +1,24 @@
-
 import RPi.GPIO as GPIO
 import time
 
 
 class IO:
+	buzzer = 23
 
-	def button_test(self):
+	def __init__(self):
 		GPIO.setwarnings(False)
 		GPIO.setmode(GPIO.BCM)
-		buzzer = 23
-		GPIO.setup(buzzer, GPIO.OUT)
-		
-		while True:
-			GPIO.output(buzzer, GPIO.HIGH)
-			print("HIGH")
-			time.sleep(0.5)
-			GPIO.output(buzzer, GPIO.LOW)
-			print("LOW")
-			time.sleep(0.5)
+		GPIO.setup(self.buzzer, GPIO.OUT)
+
+	def beep(self):
+		GPIO.output(self.buzzer, GPIO.HIGH)
+		time.sleep(0.1)
+		GPIO.output(self.buzzer, GPIO.LOW)
+
+	def double_beep(self):
+		for loop in range(2):
+			self.beep()
 
 
 io = IO()
-io.button_test()
+io.beep()
