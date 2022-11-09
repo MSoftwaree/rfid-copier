@@ -1,5 +1,5 @@
 # Preparation of the RPI
-## Enable SPI Interace
+## Enable SPI and I2C Interfaces
 
 First we need to enable the SPI. Open the raspi-config:
 
@@ -50,6 +50,12 @@ Now we can install Python:
 sudo apt install python3-dev python3-pip
 ```
 
+And also GIT:
+
+``` 
+sudo apt install git
+```
+
 ### Prepare LCD
 
 The next step is prepare RPI to communicate with LCD. Run following command:
@@ -67,7 +73,7 @@ i2cdetect -y 1
 
 It should look like this:
 
-PHOTO
+![plot](images/i2c_detect.png)
 
 When we know the LCD address we need to verify it in script. We can find script location with the command below:
 
@@ -87,36 +93,31 @@ If you are in the correct location, you need to open init file:
 sudo nano __init__.py
 ```
 
-Verify LCD address with address in the function:
+Verify LCD address with address in the init function:
 
-PHOTO
+![plot](images/i2c_address.png)
 
 If address is the same you can close the file. If it is different, you need to change it and save the file. 
 
+Last thing is to install all required libraries:
+
+``` 
+sudo pip3 install spidev
+sudo pip3 install mfrc522
+sudo pip3 install rpi_lcd
+```
 
 ### Prepare repository
-When Python is installed we can create a project dictionary:
-
-``` 
-mkdir rfid-copier
-```
-
-And go to it:
-
-``` 
-cd ~/rfid-copier
-```
-
 We are ready for download repository. Run following command:
 
 ``` 
-git clone...
+git clone git@github.com:MSoftwaree/rfid-copier.git
 ```
 
 Go to repository destination:
 
 ``` 
-cd ...
+cd rfid-copier
 ```
 
 Install virtualenv package:
@@ -137,19 +138,4 @@ Activate virtual environment:
 source ./python_env/bin/activate
 ```
 
-Install requirements:
-
-```
-sudo pip3 install -r requirements.txt
-```
-
 RPI and whole repository is prepared for using.
-
-
-
-Libraries:
-``` 
-sudo pip3 install spidev
-sudo pip3 install mfrc522
-sudo pip3 install rpi_lcd
-```
