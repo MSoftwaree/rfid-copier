@@ -15,15 +15,22 @@ class IO:
 		GPIO.setup(self.write_button, GPIO.IN)
 
 	def button_beep(self):
+		""" One beep for clicking the buttons """
 		self._beep()
 
 	def confirm_beep(self):
+		""" Two beeps for confirm rfid read/write """
 		self._beep(count=2)
 
 	def alarm_beep(self):
+		""" Three beeps when rfid data is empty """
 		self._beep(count=4)
 
 	def read_buttons(self):
+		"""
+		Read button states and return specific command
+		:return: Command for main script -> read or write
+		"""
 		command = None
 		while command is None:
 			read_state = self._read_button_state()
@@ -37,16 +44,19 @@ class IO:
 		return command
 
 	def _read_button_state(self):
+		""" Read state from read button """
 		if GPIO.input(self.read_button) == GPIO.HIGH:
 			self.button_beep()
 			return True
 
 	def _write_button_state(self):
+		""" Read state from write button """
 		if GPIO.input(self.write_button) == GPIO.HIGH:
 			self.button_beep()
 			return True
 
 	def _beep(self, count=1):
+		""" Beep with a buzzer """
 		for loop in range(count):
 			GPIO.output(self.buzzer, GPIO.HIGH)
 			time.sleep(0.1)
