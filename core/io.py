@@ -14,12 +14,14 @@ class IO:
 		GPIO.setup(self.read_button, GPIO.IN)
 		GPIO.setup(self.write_button, GPIO.IN)
 
-	def beep(self, count=1):
-		for loop in range(count):
-			GPIO.output(self.buzzer, GPIO.HIGH)
-			time.sleep(0.1)
-			GPIO.output(self.buzzer, GPIO.LOW)
-			time.sleep(0.1)
+	def button_beep(self):
+		self._beep()
+
+	def confirm_beep(self):
+		self._beep(count=2)
+
+	def alarm_beep(self):
+		self._beep(count=4)
 
 	def read_buttons(self):
 		command = None
@@ -36,8 +38,17 @@ class IO:
 
 	def _read_button_state(self):
 		if GPIO.input(self.read_button) == GPIO.HIGH:
+			self.button_beep()
 			return True
 
 	def _write_button_state(self):
 		if GPIO.input(self.write_button) == GPIO.HIGH:
+			self.button_beep()
 			return True
+
+	def _beep(self, count=1):
+		for loop in range(count):
+			GPIO.output(self.buzzer, GPIO.HIGH)
+			time.sleep(0.1)
+			GPIO.output(self.buzzer, GPIO.LOW)
+			time.sleep(0.1)
