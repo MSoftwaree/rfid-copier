@@ -5,7 +5,7 @@ from core.rfid import RFID
 
 lcd = LCD()
 io = IO()
-rfid = RFID(lcd)
+rfid = RFID(lcd, io)
 
 lcd.text("Welcome!", 1)
 
@@ -18,4 +18,3 @@ while True:
         rfid.read_card()
     elif io_state == "write":
         rfid.write_card()
-        
