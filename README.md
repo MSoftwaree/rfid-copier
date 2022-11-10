@@ -15,8 +15,8 @@ Description...
 
 
 ## Connections
-
-Photos...
+Below is a graphic with a presentation of all the necessary connections to complete the project:
+![plot](images/connections.png)
 
 ## Preparation of the RPI
 Complete instruction for how to prepare your RPI you can find here: [RPI Preparation](rpi_preparation.md)
