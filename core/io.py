@@ -4,8 +4,9 @@ import time
 
 class IO:
 	buzzer = 23
-	read_button = 17
-	write_button = 27
+	read_button = 12
+	write_button = 26
+	read_count = 10
 
 	def __init__(self):
 		GPIO.setwarnings(False)
@@ -45,13 +46,23 @@ class IO:
 
 	def _read_button_state(self):
 		""" Read state from read button """
-		if GPIO.input(self.read_button) == GPIO.HIGH:
+		counter = 0
+		for loop in range(self.read_count):
+			if GPIO.input(self.read_button) == GPIO.HIGH:
+				counter += 1
+				time.sleep(0.1)
+		if counter == self.read_count:			
 			self.button_beep()
 			return True
 
 	def _write_button_state(self):
 		""" Read state from write button """
-		if GPIO.input(self.write_button) == GPIO.HIGH:
+		counter = 0
+		for loop in range(self.read_count):		
+			if GPIO.input(self.write_button) == GPIO.HIGH:
+				counter += 1
+				time.sleep(0.1)			
+		if counter == self.read_count:
 			self.button_beep()
 			return True
 
