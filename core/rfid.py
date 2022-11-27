@@ -13,23 +13,25 @@ class RFID:
 	def read_card(self):
 		""" Reading data form card and save it in class attribute """
 		try:
+			self.lcd.clear()
 			self.lcd.text("Reading...", 1)
 			_, self.data = self.reader.read()
 			self.lcd.text("Read", 1)
 			self.io.confirm_beep()
 		finally:
 			time.sleep(2)
-			GPIO.cleanup()
 			self.lcd.clear()
 
 	def write_card(self):
 		""" Writing data to card from class attribute """
 		if self.data is None:
+			self.lcd.clear()
 			self.lcd.text("No data read!", 1)
 			self.io.alarm_beep()
 			time.sleep(2)
 			return False
 		try:
+			self.lcd.clear()
 			self.lcd.text("Hold the card", 1)
 			self.lcd.text("Writing...", 2)
 			self.reader.write(self.data)
@@ -38,5 +40,4 @@ class RFID:
 			self.io.confirm_beep()
 		finally:
 			time.sleep(2)
-			GPIO.cleanup()
 			self.lcd.clear()
