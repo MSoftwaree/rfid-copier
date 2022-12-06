@@ -73,7 +73,7 @@ i2cdetect -y 1
 
 It should look like this:
 
-![plot](images/i2c_detect.png)
+![plot](utils/images/i2c_detect.png)
 
 When we know the LCD address we need to verify it in script. We can find script location with the command below:
 
@@ -95,7 +95,7 @@ sudo nano __init__.py
 
 Verify LCD address with address in the init function:
 
-![plot](images/i2c_address.png)
+![plot](utils/images/i2c_address.png)
 
 If address is the same you can close the file. If it is different, you need to change it and save the file. 
 
